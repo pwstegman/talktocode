@@ -95,21 +95,21 @@ function addFunction(name){
 
 function addParameter(func,name){
 	if(functions[func] == null){
-		return;
+		addFunction(func);
 	}
 	functions[func]["params"].push(name);
 }
 
 function addLine(func,line){
 	if(functions[func] == null){
-		return;
+		addFunction(func);
 	}
 	functions[func]["lines"].push(line);
 }
 
 function addReturn(func,line){
 	if(functions[func] == null){
-		return;
+		addFunction(func);
 	}
 	functions[func]["re"] = line;
 }
