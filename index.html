@@ -43,7 +43,9 @@
             }else if(lastText.indexOf("ignore") == -1){
               var cmds = lastText.split("and then");
               for(var i=0;i<cmds.length;i++){
-                commands.push(cmds[i]);
+                if(processString(cmds[i]) != "error"){
+                  commands.push(cmds[i]);
+                }
               }
             }
             lastText = "";

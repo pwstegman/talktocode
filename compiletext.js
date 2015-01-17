@@ -96,6 +96,7 @@ function processString(str){
 		addFunction(str[str.indexOf("define")+1]);
 		return;
 	}
+	return "error";
 }
 
 function addFunction(name){
