@@ -22,6 +22,7 @@ function processString(str){
         	nine: "9",
         	ten: "10",
         	asterisk: "*",
+        	"rand in": "randint",
         	"  ":" ",
         };
         
@@ -43,7 +44,10 @@ function processString(str){
 	 	}
 
         if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
-            var ta = str[str.indexOf("execute")+1]+"(";
+        	if(str.indexOf("=") != -1){
+        		var bf = str[str.indexOf("=")-1]+" = ";
+        	}
+            var ta = bf+str[str.indexOf("execute")+1]+"(";
             if(str.indexOf("argument") != -1){
                 ta += str[str.indexOf("argument")+1]+")";
                 raw.push(ta);
