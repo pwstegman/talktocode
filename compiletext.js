@@ -1,9 +1,36 @@
 var functions = {};
+var raw = [];
 
 function processString(str){
+        str = str.toLowerCase();
+        str = str.split("equals").join("=");
+	str = str.split("plus").join("+");
+        str = str.split("  ").join(" ");
+        str = str.split("one").join("1");
 	str = str.split(" ");
-	if(str.indexOf("parameter") != -1 && str.indexOf("function") != -1){
-		addParameter(str[str.indexOf("function")+1],str[str.indexOf("parameter")+1])
+	
+        if(str.indexOf("raw") != -1 && str.indexOf("execute") != -1){
+            var ta = str[str.indexOf("execute")+1]+"(";
+            if(str.indexOf("argument") != -1){
+                ta += str[str.indexOf("argument")+1]+")";
+                raw.push(ta);
+                return;
+            }
+            var args = [];
+            if(str.indexOf("arguments") != -1){
+                for(var i=str.indexOf("arguments")+1;i<str.length;i++){
+                    if(str[i] != "and" && str[i] != "&"){
+                        args.push(str[i]);
+                    }
+                }
+            }
+            ta += args.join(", ");
+            ta += ")";
+            raw.push(ta);
+            return;
+        }
+        if(str.indexOf("argument") != -1 && str.indexOf("function") != -1){
+		addParameter(str[str.indexOf("function")+1],str[str.indexOf("argument")+1])
 		return;
 	}
 	if(str.indexOf("define") != -1){
@@ -51,5 +78,6 @@ function compile(){
 	    }
 	  }
 	}
+        result += raw.join("\n");
 	return result;
 }
