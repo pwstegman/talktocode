@@ -23,7 +23,9 @@
             if(!running){return;}
             var text = [];
             for(var i=0;i<event.results.length;i++){
+              if(event.results[i][0].confidence > 0.8){
                 text.push(event.results[i][0].transcript);
+              }
             }
             text = text.join(" ");
             document.getElementById("speech").innerHTML = "<p>"+text+"</p>";
