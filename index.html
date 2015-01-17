@@ -39,6 +39,7 @@
             }else if(lastText.indexOf("ignore") == -1){
               commands.push(lastText);
             }
+            lastText = "";
             running = false;
             rec.stop();            
             document.getElementById("speech").innerHTML = "";
