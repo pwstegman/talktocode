@@ -45,8 +45,13 @@ function processString(str){
 
         if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
         	var bf = "";
-        	if(str.indexOf("set") != -1){
-        		bf = str[str.indexOf("set")+1]+" = ";
+        	
+        	if(str.indexOf("variable") != -1){
+        		bf = str[str.indexOf("variable")+1]+" = ";
+        	}else if(str.indexOf("in") != -1){
+        		bf = str[str.indexOf("in")+1]+" = ";
+        	}else if(str.indexOf("to") != -1){
+        		bf = str[str.indexOf("to")+1];
         	}
             var ta = bf+str[str.indexOf("execute")+1]+"(";
             if(str.indexOf("argument") != -1){
