@@ -24,6 +24,7 @@ function processString(str){
         	asterisk: "*",
         	"rand in": "randint",
         	"new turtle": "turtle.Turtle()",
+        	".": " dot",
         	"  ":" ",
         };
         
