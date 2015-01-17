@@ -28,6 +28,8 @@ function processString(str){
 	 			str.split(key).join(replaces[key]);
 	 		}
 	 	}
+
+	 	str = str.split(" ");
 	
         if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
             var ta = str[str.indexOf("execute")+1]+"(";
