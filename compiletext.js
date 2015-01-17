@@ -83,14 +83,23 @@ function addFunction(name){
 }
 
 function addParameter(func,name){
+	if(functions[func] == null){
+		return;
+	}
 	functions[func]["params"].push(name);
 }
 
 function addLine(func,line){
+	if(functions[func] == null){
+		return;
+	}
 	functions[func]["lines"].push(line);
 }
 
 function addReturn(func,line){
+	if(functions[func] == null){
+		return;
+	}
 	functions[func]["re"] = line;
 }
 
