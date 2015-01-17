@@ -23,6 +23,7 @@ function processString(str){
         	ten: "10",
         	asterisk: "*",
         	"rand in": "randint",
+        	"new turtle", "turtle.Turtle()",
         	"  ":" ",
         };
         
@@ -46,7 +47,9 @@ function processString(str){
         if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
         	var bf = "";
         	
-        	if(str.indexOf("variable") != -1){
+        	if(str.indexOf("dot") != -1){
+        		bf = str[str.indexOf("dot")-1]+".";
+        	}else if(str.indexOf("variable") != -1){
         		bf = str[str.indexOf("variable")+1]+" = ";
         	}else if(str.indexOf("in") != -1){
         		bf = str[str.indexOf("in")+1]+" = ";
