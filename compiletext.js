@@ -23,7 +23,7 @@ function processString(str){
         	ten: "10",
         	asterisk: "*",
         	"rand in": "randint",
-        	"new turtle", "turtle.Turtle()",
+        	"new turtle": "turtle.Turtle()",
         	"  ":" ",
         };
         
