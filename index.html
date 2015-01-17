@@ -24,10 +24,6 @@
             var text = [];
             for(var i=0;i<event.results.length;i++){
                 text.push(event.results[i][0].transcript);
-                if(event.results[i][0].transcript == "clear"){
-                  running = false;
-                  rec.stop();
-                }
             }
             text = text.join(" ");
             document.getElementById("speech").innerHTML = "<p>"+text+"</p>";
@@ -38,10 +34,13 @@
 	};
 
         function finish(){
-            if(lastText.indexOf("run") != -1){runit();lastText="";return;}
+            if(lastText.indexOf("run") != -1){
+              runit();
+            }else if(lastText.indexOf("ignore") == -1){
+              commands.push(lastText);
+            }
             running = false;
-            rec.stop();
-            commands.push(lastText);
+            rec.stop();            
             document.getElementById("speech").innerHTML = "";
             functions = {};
             raw = []
