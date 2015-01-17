@@ -25,7 +25,7 @@ function processString(str){
         
         for (var key in replaces) {
 	 		if (replaces.hasOwnProperty(key)) {
-	 			str.split(key).join(replaces[key]);
+	 			str = str.split(key).join(replaces[key]);
 	 		}
 	 	}
 
