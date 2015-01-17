@@ -3,13 +3,33 @@ var raw = [];
 
 function processString(str){
         str = str.toLowerCase();
-        str = str.split("equals").join("=");
-	str = str.split("plus").join("+");
-        str = str.split("  ").join(" ");
-        str = str.split("one").join("1");
-	str = str.split(" ");
+        replaces = {
+        	equals: "=",
+        	plus: "+",
+        	minus: "-",
+        	"divided by": "/",
+        	"over": "/",
+        	"times": "*",
+        	one: "1",
+        	two: "2",
+        	three: "3",
+        	four: "4",
+        	five: "5",
+        	six: "6",
+        	seven: "7",
+        	eight: "8",
+        	nine: "9",
+        	ten: "10",
+        	"  ":" ",
+        };
+        
+        for (var key in replaces) {
+	 		if (replaces.hasOwnProperty(key)) {
+	 			str.split(key).join(replaces[key]);
+	 		}
+	 	}
 	
-        if(str.indexOf("raw") != -1 && str.indexOf("execute") != -1){
+        if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
             var ta = str[str.indexOf("execute")+1]+"(";
             if(str.indexOf("argument") != -1){
                 ta += str[str.indexOf("argument")+1]+")";
@@ -32,6 +52,13 @@ function processString(str){
         if(str.indexOf("argument") != -1 && str.indexOf("function") != -1){
 		addParameter(str[str.indexOf("function")+1],str[str.indexOf("argument")+1])
 		return;
+	}
+	if(str.indexOf("function") == -1 && str.indexOf("line") != -1){
+		var line = "";
+		for(var i=str.indexOf("line")+1;i<str.length;i++){
+			line += str[i]+" ";
+		}
+		raw.push(line);
 	}
 	if(str.indexOf("define") != -1){
 		addFunction(str[str.indexOf("define")+1]);
