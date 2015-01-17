@@ -23,7 +23,7 @@
             if(!running){return;}
             var text = [];
             for(var i=0;i<event.results.length;i++){
-              if(event.results[i][0].confidence > 0.8){
+              if(event.results[i][0].confidence > 0.1){
                 text.push(event.results[i][0].transcript);
               }
             }
