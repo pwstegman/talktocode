@@ -21,6 +21,7 @@ function processString(str){
         	eight: "8",
         	nine: "9",
         	ten: "10",
+        	asterisk: "*",
         	"  ":" ",
         };
         
