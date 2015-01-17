@@ -115,6 +115,9 @@ function addReturn(func,line){
 
 function compile(){
 	var result = "";
+	for(var i=0;i<imports.length;i++){
+		result += imports[i]+"\n";
+	}
 	for (var key in functions) {
 	  if (functions.hasOwnProperty(key)) {
 	    result += "def "+key+"("+functions[key].params.join(", ")+"):\n";
