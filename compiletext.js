@@ -73,16 +73,23 @@ function processString(str){
 	}
 	if(str.indexOf("function") == -1 && str.indexOf("line") != -1){
 		raw.push(str.slice(str.indexOf("line")+1).join(" "));
-	}
-	if(str.indexOf("define") != -1){
-		addFunction(str[str.indexOf("define")+1]);
 		return;
 	}
 	if(str.indexOf("function") != -1 && str.indexOf("return") != -1){
 		addReturn(str[str.indexOf("function")+1], str[str.indexOf("return")+1]);
+		return;
 	}
 	if(str.indexOf("line") != -1 && str.indexOf("function") != -1){
 		addLine(str[str.indexOf("function")+1],str.slice(str.indexOf("line")+1).join(" "));
+		return;
+	}
+	if(str.indexOf("function") != -1){
+		addFunction(str[str.indexOf("function")+1]);
+		return;
+	}
+	if(str.indexOf("define") != -1){
+		addFunction(str[str.indexOf("define")+1]);
+		return;
 	}
 }
 
