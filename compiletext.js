@@ -71,11 +71,7 @@ function processString(str){
 		return;
 	}
 	if(str.indexOf("function") == -1 && str.indexOf("line") != -1){
-		var line = "";
-		for(var i=str.indexOf("line")+1;i<str.length;i++){
-			line += str[i]+" ";
-		}
-		raw.push(line);
+		raw.push(str.slice(str.indexOf("line")+1).join(" "));
 	}
 	if(str.indexOf("define") != -1){
 		addFunction(str[str.indexOf("define")+1]);
@@ -85,11 +81,7 @@ function processString(str){
 		addReturn(str[str.indexOf("function")+1], str[str.indexOf("return")+1]);
 	}
 	if(str.indexOf("line") != -1 && str.indexOf("function") != -1){
-		var line = "";
-		for(var i=str.indexOf("line")+1;i<str.length;i++){
-			line += str[i]+" ";
-		}
-		addLine(str[str.indexOf("function")+1],line);
+		addLine(str[str.indexOf("function")+1],str.slice(str.indexOf("line")+1).join(" "));
 	}
 }
 
