@@ -1,0 +1,17 @@
+<html>
+<head></head>
+<body>
+    <div id="out">
+    </div>
+    <script>
+        var rec = new webkitSpeechRecognition();
+        rec.lang = "en";
+        rec.continuous = true;
+        rec.interimResults = true;
+        rec.onresult = function (event) {
+            console.log(event);
+        };
+        rec.start();
+    </script>
+</body>
+</html>
