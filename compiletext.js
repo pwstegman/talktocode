@@ -1,5 +1,6 @@
 var functions = {};
 var raw = [];
+var imports = [];
 
 function processString(str){
         str = str.toLowerCase();
@@ -31,6 +32,15 @@ function processString(str){
 
 	 	str = str.split(" ");
 	
+	 	if(str.indexOf("import") != -1 && str.indexOf("from") != -1){
+	 		imports.push("from "+str[str.indexOf("from")+1]+" import "+str[str.indexOf("import")+1]);
+	 		return;
+	 	}
+	 	if(str.indexOf("import") != -1){
+	 		imports.push("import "+str[str.indexOf("import")+1]);
+	 		return;
+	 	}
+
         if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
             var ta = str[str.indexOf("execute")+1]+"(";
             if(str.indexOf("argument") != -1){
