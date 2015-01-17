@@ -1,20 +1,50 @@
 <html>
-<head></head>
+<head>
+<script src="compiletext.js"></script>
+</head>
 <body>
-    <div id="out">
+    <textarea id="out">
+    </textarea>
+    <div id="speech">
     </div>
     <script>
         var rec = new webkitSpeechRecognition();
         rec.lang = "en";
         rec.continuous = true;
         rec.interimResults = true;
+        var commands = [];
+        var processTimer;
+        var lastText = "";
+        var running = true;
         rec.onresult = function (event) {
-            var commands = [];
+            if(!running){return;}
+            var text = [];
             for(var i=0;i<event.results.length;i++){
-                commands.push(event.results[i][0].transcript);
+                text.push(event.results[i][0].transcript);
             }
+            text = text.join(" ");
+            document.getElementById("speech").innerHTML = "<p>"+text+"</p>";
+            lastText = text;
+            console.log(event.results);
+            window.clearTimeout(processTimer);
+            processTimer = window.setTimeout(finish, 2000);
+	};
+
+        function finish(){
+            running = false;
+            rec.stop();
+            commands.push(lastText);
+            document.getElementById("speech").innerHTML = "";
+            functions = {};
+            for(var i=0; i<commands.length;i++){
+                processString(commands[i]);
+            }
+            document.getElementById("out").value = compile();
             console.log(commands);
-        };
+        }
+
+        rec.onend = function(){rec.start();running=true;};
+
         rec.start();
     </script>
 </body>

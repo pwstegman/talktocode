@@ -2,8 +2,8 @@ var functions = {};
 
 function processString(str){
 	str = str.split(" ");
-	if(str.indexOf("param") != -1 && str.indexOf("function") != -1){
-		addParameter(str[str.indexOf("function")+1],str[str.indexOf("param")+1])
+	if(str.indexOf("parameter") != -1 && str.indexOf("function") != -1){
+		addParameter(str[str.indexOf("function")+1],str[str.indexOf("parameter")+1])
 		return;
 	}
 	if(str.indexOf("define") != -1){
@@ -12,6 +12,13 @@ function processString(str){
 	}
 	if(str.indexOf("function") != -1 && str.indexOf("return") != -1){
 		addReturn(str[str.indexOf("function")+1], str[str.indexOf("return")+1]);
+	}
+	if(str.indexOf("line") != -1 && str.indexOf("function") != -1){
+		var line = "";
+		for(var i=str.indexOf("line")+1;i<str.length;i++){
+			line += str[i]+" ";
+		}
+		addLine(str[str.indexOf("function")+1],line);
 	}
 }
 
