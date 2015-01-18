@@ -44,6 +44,7 @@ function processString(str){
 	 		str[str.indexOf("text")+1] = '"'+str.slice(str.indexOf("text")+1).join(" ")+'"';
 	 		str.splice(str.indexOf("text")+2);
 	 		str.splice(str.indexOf("text"),1);
+	 		return;
 	 	}
 
 	 	if(str.indexOf("loop") != -1 && str.indexOf("line") != -1){
@@ -109,7 +110,7 @@ function processString(str){
 	 		return;
 	 	}
 
-        if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
+        if(str.indexOf("function") != -1 && str.indexOf("execute") != -1){
         	var bf = "";
         	
         	if(str.indexOf("dot") != -1){
@@ -138,6 +139,41 @@ function processString(str){
             ta += args.join(", ");
             ta += ")";
             addLine(str[str.indexOf("function")+1],ta);
+            return;
+        }
+        if(str.indexOf("argument") != -1 && str.indexOf("function") != -1){
+		addParameter(str[str.indexOf("function")+1],str[str.indexOf("argument")+1])
+		return;
+	}
+	if(str.indexOf("function") == -1 && str.indexOf("execute") != -1){
+        	var bf = "";
+        	
+        	if(str.indexOf("dot") != -1){
+        		bf = str[str.indexOf("dot")-1]+".";
+        	}else if(str.indexOf("variable") != -1){
+        		bf = str[str.indexOf("variable")+1]+" = ";
+        	}else if(str.indexOf("in") != -1){
+        		bf = str[str.indexOf("in")+1]+" = ";
+        	}else if(str.indexOf("to") != -1){
+        		bf = str[str.indexOf("to")+1];
+        	}
+            var ta = bf+str[str.indexOf("execute")+1]+"(";
+            if(str.indexOf("argument") != -1){
+                ta += str[str.indexOf("argument")+1]+")";
+                raw.push(ta);
+                return;
+            }
+            var args = [];
+            if(str.indexOf("arguments") != -1){
+                for(var i=str.indexOf("arguments")+1;i<str.length;i++){
+                    if(str[i] != "and" && str[i] != "&"){
+                        args.push(str[i]);
+                    }
+                }
+            }
+            ta += args.join(", ");
+            ta += ")";
+            raw.push(ta);
             return;
         }
         if(str.indexOf("argument") != -1 && str.indexOf("function") != -1){
