@@ -69,6 +69,7 @@
             while(commandsCopy.indexOf("undo") != -1){
               commandsCopy.splice(commandsCopy.indexOf("undo")-1,2);
             }
+            commandsCopy.splice(0,commandsCopy.lastIndexOf("clear")+1);
             for(var i=0; i<commandsCopy.length;i++){
                 processString(commandsCopy[i]);
             }
