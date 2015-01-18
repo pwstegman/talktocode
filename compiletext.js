@@ -28,7 +28,7 @@ function processString(str){
         	"  ":" ",
         };
 
-        if(str == "undo"){
+        if(str == "undo" || str == "clear"){
         	return;
         }
         
