@@ -27,6 +27,10 @@ function processString(str){
         	"new turtle": "turtle.Turtle()",
         	"  ":" ",
         };
+
+        if(str == "undo"){
+        	return;
+        }
         
         for (var key in replaces) {
 	 		if (replaces.hasOwnProperty(key)) {
