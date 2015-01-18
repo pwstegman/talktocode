@@ -136,7 +136,7 @@ function processString(str){
             }
             ta += args.join(", ");
             ta += ")";
-            raw.push(ta);
+            addLine(str[str.indexOf("function")+1],ta);
             return;
         }
         if(str.indexOf("argument") != -1 && str.indexOf("function") != -1){
