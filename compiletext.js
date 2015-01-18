@@ -51,8 +51,8 @@ function processString(str){
 
 	 	if(str.indexOf("loop") != -1){
 	 		var index = str[str.indexOf("loop")+1];
-	 		var from = str[str.indexOf("start")+1];
-	 		var to = str[str.indexOf("end")+1];
+	 		var from = str[str.indexOf("loop")+2];
+	 		var to = str[str.indexOf("through")+1];
 	 		raw.push(["for "+index+" in range("+from+", "+to+"):",[]]);
 	 		return;
 	 	}
