@@ -37,13 +37,45 @@ function processString(str){
 	 	str = str.split(" ");
 
 	 	if(str.indexOf("loop") != -1 && str.indexOf("line") != -1){
+	 		if(str.indexOf("execute") != -1){
+	 			var bf = "";
+        	
+	        	if(str.indexOf("dot") != -1){
+	        		bf = str[str.indexOf("dot")-1]+".";
+	        	}else if(str.indexOf("variable") != -1){
+	        		bf = str[str.indexOf("variable")+1]+" = ";
+	        	}else if(str.indexOf("in") != -1){
+	        		bf = str[str.indexOf("in")+1]+" = ";
+	        	}else if(str.indexOf("to") != -1){
+	        		bf = str[str.indexOf("to")+1];
+	        	}
+	            var ta = bf+str[str.indexOf("execute")+1]+"(";
+	            if(str.indexOf("argument") != -1){
+	                ta += str[str.indexOf("argument")+1]+")";
+	            }
+	            var args = [];
+	            if(str.indexOf("arguments") != -1){
+	                for(var i=str.indexOf("arguments")+1;i<str.length;i++){
+	                    if(str[i] != "and" && str[i] != "&"){
+	                        args.push(str[i]);
+	                    }
+	                }
+	            	ta += args.join(", ");
+	            	ta += ")";
+	            }
+
+	 		}
 	 		var loopNum = str[str.indexOf("loop")+1];
 	 		var cur = 0;
 	 		for(var i=0;i<raw.length;i++){
 	 			if(raw[i] && raw[i].constructor == Array){
 	 				cur += 1;
 	 				if(cur == loopNum){
-	 					raw[i][1].push(str.slice(str.indexOf("line")+1).join(" "));
+	 					if(str.indexOf("execute") == -1){
+	 						raw[i][1].push(str.slice(str.indexOf("line")+1).join(" "));
+	 					}else{
+	 						raw[i][1].push(ta);
+	 					}
 	 				}
 	 			}
 	 		}
