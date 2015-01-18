@@ -73,6 +73,8 @@
                 processString(commandsCopy[i]);
             }
             document.getElementById("out").value = compile();
+            document.getElementById("out").rows.style = "";
+            document.getElementById("out").rows = (document.getElementById("out").value.split("\n").length)
             console.log(commandsCopy);
         }
 
