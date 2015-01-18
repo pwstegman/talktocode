@@ -53,17 +53,17 @@ function processString(str){
         	
 	        	if(str.indexOf("dot") != -1){
 	        		bf = str[str.indexOf("dot")-1]+".";
-	        	}else if(str.indexOf("variable") != -1){
-	        		bf = str[str.indexOf("variable")+1]+" = ";
-	        	}else if(str.indexOf("in") != -1){
-	        		bf = str[str.indexOf("in")+1]+" = ";
-	        	}else if(str.indexOf("to") != -1){
-	        		bf = str[str.indexOf("to")+1];
+	        	}else if(str.lastIndexOf("variable") != -1){
+	        		bf = str[str.lastIndexOf("variable")+1]+" = ";
+	        	}else if(str.lastIndexOf("in") != -1){
+	        		bf = str[str.lastIndexOf("in")+1]+" = ";
+	        	}else if(str.lastIndexOf("to") != -1){
+	        		bf = str[str.lastIndexOf("to")+1];
 	        	}
 	            var ta = bf+str[str.indexOf("execute")+1]+"(";
 	            if(str.indexOf("argument") != -1){
 	                ta += str[str.indexOf("argument")+1]+")";
-	            }
+	            }else{
 	            var args = [];
 	            if(str.indexOf("arguments") != -1){
 	                for(var i=str.indexOf("arguments")+1;i<str.length;i++){
@@ -71,9 +71,10 @@ function processString(str){
 	                        args.push(str[i]);
 	                    }
 	                }
-	            	ta += args.join(", ");
-	            	ta += ")";
 	            }
+	            ta += args.join(", ");
+	            ta += ")";
+				}
 
 	 		}
 	 		var loopNum = str[str.indexOf("loop")+1];
