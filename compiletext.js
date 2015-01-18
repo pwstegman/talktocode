@@ -35,7 +35,15 @@ function processString(str){
 	 	}
 
 	 	str = str.split(" ");
-	
+
+	 	if(str.indexOf("loop") != -1){
+	 		var index = str[str.indexOf("loop")+1];
+	 		var from = str[str.indexOf("from")+1];
+	 		var to = str[str.indexOf("to")+1];
+	 		raw.push(["for "+index+" in range("+from+", "+to+"):",[]]);
+	 		return;
+	 	}
+
 	 	if(str.indexOf("import") != -1 && str.indexOf("from") != -1){
 	 		imports.push("from "+str[str.indexOf("from")+1]+" import "+str[str.indexOf("import")+1]);
 	 		return;
@@ -144,6 +152,17 @@ function compile(){
 	    }
 	  }
 	}
-        result += raw.join("\n");
+    
+    for(var i=0;i<raw.length;i++){
+    	if(raw[i] && raw[i].constructor === Array){
+    		result += raw[i][0]+"\n";
+    		for(var j=0;j<raw[i][1].length;j++){
+    			result += "  "+raw[i][1][j]+"\n";
+    		}
+    	}else{
+    		result += raw[i]+"\n";
+    	}
+    }
+
 	return result;
 }
