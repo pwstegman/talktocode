@@ -36,6 +36,11 @@ function processString(str){
 
 	 	str = str.split(" ");
 
+	 	while(str.indexOf("text") != -1){
+	 		str[str.indexOf("text")+1] = '"'+str[str.indexOf("text")+1]+'"';
+	 		str.splice(str.indexOf("text"),1);
+	 	}
+
 	 	if(str.indexOf("loop") != -1 && str.indexOf("line") != -1){
 	 		if(str.indexOf("execute") != -1){
 	 			var bf = "";
