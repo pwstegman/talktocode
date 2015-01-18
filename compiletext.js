@@ -47,6 +47,7 @@ function processString(str){
 	 				}
 	 			}
 	 		}
+	 		return;
 	 	}
 
 	 	if(str.indexOf("loop") != -1){
