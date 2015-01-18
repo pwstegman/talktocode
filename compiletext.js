@@ -41,7 +41,7 @@ function processString(str){
 	 	str = str.split(" ");
 
 	 	while(str.indexOf("text") != -1){
-	 		str[str.indexOf("text")+1] = '"'+str[str.indexOf("text")+1]+'"';
+	 		str[str.indexOf("text")+1] = '"'+str.slice(str.indexOf("text")+1).join(" ")+'"';
 	 		str.splice(str.indexOf("text"),1);
 	 	}
 
