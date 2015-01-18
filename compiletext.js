@@ -36,6 +36,19 @@ function processString(str){
 
 	 	str = str.split(" ");
 
+	 	if(str.indexOf("loop") != -1 && str.indexOf("line") != -1){
+	 		var loopNum = str[str.indexOf("loop")+1];
+	 		var cur = 0;
+	 		for(var i=0;i<raw.length;i++){
+	 			if(raw[i] && raw[i].constructor == Array){
+	 				cur += 1;
+	 				if(cur == loopNum){
+	 					raw[i][1].push(str.slice(str.indexOf("line")+1).join(" "));
+	 				}
+	 			}
+	 		}
+	 	}
+
 	 	if(str.indexOf("loop") != -1){
 	 		var index = str[str.indexOf("loop")+1];
 	 		var from = str[str.indexOf("start")+1];
