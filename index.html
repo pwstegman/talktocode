@@ -37,7 +37,8 @@
             processTimer = window.setTimeout(finish, 2000);
 	};
 
-  myDataRef.on('child_added', function(snapshot) {
+      myDataRef.on('child_added', function(snapshot) {
+        console.log("Got data");
         var message = snapshot.val().command;
         commands.push(message);
         updateCode();
