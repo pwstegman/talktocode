@@ -42,8 +42,8 @@ function processString(str){
 
 	 	while(str.indexOf("text") != -1){
 	 		str[str.indexOf("text")+1] = '"'+str.slice(str.indexOf("text")+1).join(" ")+'"';
-	 		str.splice(str.indexOf("text"),1);
 	 		str.splice(str.indexOf("text")+2);
+	 		str.splice(str.indexOf("text"),1);
 	 	}
 
 	 	if(str.indexOf("loop") != -1 && str.indexOf("line") != -1){
