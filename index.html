@@ -47,8 +47,6 @@
         function finish(){
             if(lastText.indexOf("run") != -1){
               runit();
-            }else if(lastText.indexOf("undo") != -1 && lastText.indexOf("ignore") == -1){
-              commands.splice(commands.length-1,1);
             }else if(lastText.indexOf("ignore") == -1){
               var cmds = lastText.split("and then");
               for(var i=0;i<cmds.length;i++){
@@ -67,11 +65,15 @@
           functions = {};
             raw = [];
             imports = [];
-            for(var i=0; i<commands.length;i++){
-                processString(commands[i]);
+            commandsCopy = commands.slice(0);
+            while(commandsCopy.indexOf("undo") != -1){
+              commandsCopy.splice(commandsCopy.indexOf("undo")-1,2);
+            }
+            for(var i=0; i<commandsCopy.length;i++){
+                processString(commandsCopy[i]);
             }
             document.getElementById("out").value = compile();
-            console.log(commands);
+            console.log(commandsCopy);
         }
 
         rec.onend = function(){rec.start();running=true;};
