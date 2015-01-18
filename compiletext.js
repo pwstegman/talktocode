@@ -25,6 +25,10 @@ function processString(str){
         	"rand in": "randint",
         	".": " dot",
         	"new turtle": "turtle.Turtle()",
+        	"pen up", "penup",
+        	"pen down", "pendown",
+        	"set position", "setposition",
+        	"pen color", "pencolor",
         	"  ":" ",
         };
 
