@@ -124,7 +124,7 @@ function processString(str){
             var ta = bf+str[str.indexOf("execute")+1]+"(";
             if(str.indexOf("argument") != -1){
                 ta += str[str.indexOf("argument")+1]+")";
-                raw.push(ta);
+                addLine(str[str.indexOf("function")+1],ta);
                 return;
             }
             var args = [];
